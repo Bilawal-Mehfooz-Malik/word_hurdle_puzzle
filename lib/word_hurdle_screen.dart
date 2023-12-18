@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:word_hurdle_puzzle/providers/hurdle_provider.dart';
+import 'package:word_hurdle_puzzle/keyboard_view.dart';
 import 'package:word_hurdle_puzzle/wordle_view.dart';
+import 'package:word_hurdle_puzzle/providers/hurdle_provider.dart';
 
 class WordHurdleScreen extends StatefulWidget {
   const WordHurdleScreen({super.key});
@@ -25,21 +26,26 @@ class _WordHurdleScreenState extends State<WordHurdleScreen> {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<HurdleProvider>(
-                builder: (context, value, child) => GridView.builder(
-                  itemCount: value.hurdleBoard.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.70,
+                child: Consumer<HurdleProvider>(
+                  builder: (context, provider, child) => GridView.builder(
+                    itemCount: provider.hurdleBoard.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4,
+                    ),
+                    itemBuilder: (context, index) {
+                      final wordle = provider.hurdleBoard[index];
+                      return WordleView(wordle: wordle);
+                    },
                   ),
-                  itemBuilder: (context, index) {
-                    final wordle = value.hurdleBoard[index];
-                    return WordleView(wordle: wordle);
-                  },
                 ),
               ),
-            )
+            ),
+            const KeyboardView(),
           ],
         ),
       ),
