@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:word_hurdle_puzzle/word_hurdle_screen.dart';
+import 'package:word_hurdle_puzzle/screens/word_hurdle_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:word_hurdle_puzzle/providers/hurdle_provider.dart';
 

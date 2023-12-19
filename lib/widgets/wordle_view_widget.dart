@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:word_hurdle_puzzle/wordle_widget.dart';
+import 'package:word_hurdle_puzzle/data/wordle_data.dart';
 
 class WordleView extends StatelessWidget {
   const WordleView({super.key, required this.wordle});

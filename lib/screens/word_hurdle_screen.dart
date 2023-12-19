@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:word_hurdle_puzzle/keyboard_view.dart';
-import 'package:word_hurdle_puzzle/wordle_view.dart';
+import 'package:word_hurdle_puzzle/widgets/wordle_view_widget.dart';
+import 'package:word_hurdle_puzzle/widgets/keyboard_view_widget.dart';
 import 'package:word_hurdle_puzzle/providers/hurdle_provider.dart';
 
 class WordHurdleScreen extends StatefulWidget {
@@ -45,7 +45,32 @@ class _WordHurdleScreenState extends State<WordHurdleScreen> {
                 ),
               ),
             ),
-            const KeyboardView(),
+            Consumer<HurdleProvider>(
+              builder: (context, provider, child) => KeyboardView(
+                excludedLetters: provider.exculdedLetters,
+                onPressed: (value) {
+                  provider.inputLetter(value);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Consumer<HurdleProvider>(
+                builder: (context, provider, child) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: provider.deleteLetter,
+                      child: const Text('DELETE'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('SUBMIT'),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
