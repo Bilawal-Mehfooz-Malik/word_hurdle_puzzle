@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:word_hurdle_puzzle/data/error_message.dart';
 import 'package:word_hurdle_puzzle/widgets/wordle_view_widget.dart';
 import 'package:word_hurdle_puzzle/widgets/keyboard_view_widget.dart';
 import 'package:word_hurdle_puzzle/providers/hurdle_provider.dart';
@@ -64,7 +65,45 @@ class _WordHurdleScreenState extends State<WordHurdleScreen> {
                       child: const Text('DELETE'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (!provider.isAValidWord) {
+                          showErrorSnack(
+                            context: context,
+                            errorMessage: 'Not a word in my dictionary',
+                          );
+                          return;
+                        }
+                        if (provider.shouldCheckForAnswer) {
+                          provider.checkAnswer();
+                        }
+                        if (provider.wins) {
+                          showDialogs(
+                            context: context,
+                            title: 'You Win!!!',
+                            body: 'The word was ${provider.targetWord}',
+                            onPlayAgain: () {
+                              Navigator.of(context).pop();
+                              provider.resetGame();
+                            },
+                            onCancel: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        } else if (provider.noAttemptsLeft) {
+                          showDialogs(
+                            context: context,
+                            title: 'You Lost!!!',
+                            body: 'The word was ${provider.targetWord}',
+                            onPlayAgain: () {
+                              Navigator.of(context).pop();
+                              provider.resetGame();
+                            },
+                            onCancel: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        }
+                      },
                       child: const Text('SUBMIT'),
                     ),
                   ],
