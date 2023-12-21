@@ -34,6 +34,18 @@ dependencies:
   english_words: ^4.0.0
   flutter_easyloading: ^3.0.5
   provider: ^6.1.1
+  flutter_native_splash: ^2.3.8
+
+flutter_native_splash:
+  # Customize the parameters below, and run the following command in the terminal:
+  # dart run flutter_native_splash:create
+  # To restore Flutter's default white splash screen, run the following command in the terminal:
+  # dart run flutter_native_splash:remove.
+  color: "#000000"
+  image: assets/splash.png
+  android: true
+  ios: true
+
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +79,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/word_hurdle_icon.png
+    - assets/word_hurdle_icon.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
